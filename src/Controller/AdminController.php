@@ -19,8 +19,7 @@ final class AdminController extends AbstractController
     #[Route('/articles/add', name: 'article_add')]
     public function articleAdd(
         Request $request,
-        EntityManagerInterface $em,
-        SluggerInterface $slugger
+        EntityManagerInterface $em
     ): Response {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -28,9 +27,6 @@ final class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $article
-                ->setCreatedAt(new DateTimeImmutable())
-                ->setSlug($slugger->slug($article->getTitle()));
             $em->persist($article);
             $em->flush();
 
