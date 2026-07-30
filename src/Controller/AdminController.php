@@ -33,6 +33,10 @@ final class AdminController extends AbstractController
                 ->setSlug($slugger->slug($article->getTitle()));
             $em->persist($article);
             $em->flush();
+
+            $this->addFlash('success', "L'article a été créé avec succès.");
+
+            return $this->redirectToRoute('article_item', ['slug' => $article->getSlug()]);
         }
 
         return $this->render('article/add.html.twig', [

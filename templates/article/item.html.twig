@@ -7,7 +7,12 @@
     {{ article.tags|map(t => "#{t.label}")|join(', ') }}
   </h2>
 
-  <h3>{{ article.createdAt|date('d/m/y') }}</h3>
+    <p>Auteur : {{ article.author.firstname }} {{ article.author.name }}</p>
+    <h3>{{ article.createdAt|date('d/m/y') }}</h3>
 
   <div>{{ article.content }}</div>
+
+  {% if is_granted('ARTICLE_EDIT', article) %}
+    <a href="{{ path('article_edit', { id: article.id }) }}">Modifier l'article</a>
+  {% endif %}
 {% endblock %}

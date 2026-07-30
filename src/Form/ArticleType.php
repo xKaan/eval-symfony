@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Tag;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -23,6 +24,10 @@ class ArticleType extends AbstractType
             ->add('content', TextareaType::class)
             ->add('visible', CheckboxType::class, [
                 'required' => false
+            ])
+            ->add('author', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => fn (User $user) => trim($user->getFirstname() . ' ' . $user->getName()) ?: $user->getEmail()
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
