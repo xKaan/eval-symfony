@@ -11,6 +11,11 @@
   <li>
     <a href="{{ path('articles_list') }}">Articles</a>
   </li>
+    {% if is_granted('ROLE_USER') %}
+        <li>
+            <a href="{{ path('article_add') }}">Créer un article</a>
+        </li>
+    {% endif %}
     <li>
         <a href="{{ path('contact_new') }}">Créer un contact</a>
     </li>
