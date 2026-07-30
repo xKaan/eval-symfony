@@ -14,7 +14,15 @@ class ArticleListener {
     }
 
     public function prePersist(Article $article, LifecycleEventArgs $args): void {
-        $article->setCreatedAt(new \DateTimeImmutable());
-        $article->setSlug(strtolower($this->slugger->slug($article->getTitle())));
+
+        // Si on ne met pas ces conditions, lors de la création des fixtures, ça va réecrire par dessus les valeurs.
+        // Or on avait mis pour les fixtures une range de 2 ans pour le createdAt des articles
+        if ($article->getCreatedAt() === null) {
+            $article->setCreatedAt(new \DateTimeImmutable());
+        }
+
+        if ($article->getSlug() === null) {
+            $article->setSlug(strtolower($this->slugger->slug($article->getTitle())));
+        }
     }
 }
