@@ -25,6 +25,11 @@ class ArticleRepository extends ServiceEntityRepository
         );
     }
 
+    public function findAllVisible(): array
+    {
+        return $this->findBy(['visible' => true]);
+    }
+
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */
