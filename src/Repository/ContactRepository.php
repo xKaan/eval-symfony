@@ -16,6 +16,11 @@ class ContactRepository extends ServiceEntityRepository
         parent::__construct($registry, Contact::class);
     }
 
+    public function findAllOrdererByCreatedAtDesc(): array
+    {
+        return $this->findBy([], ['createdAt' => 'DESC']);
+    }
+
     //    /**
     //     * @return Contact[] Returns an array of Contact objects
     //     */

@@ -2,6 +2,9 @@
   <li>
     <a href="{{ path('homepage') }}">Accueil</a>
   </li>
+    <li>
+        <a href="{{ path('app_login') }}">Connexion</a>
+    </li>
   <li>
     <a href="{{ path('articles_list') }}">Articles</a>
   </li>
@@ -14,4 +17,11 @@
   <li>
     <a href="{{ path('about') }}">À propos</a>
   </li>
+
+    {# C'était relou d'y aller par l'URL #}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li>
+            <a href="{{ path('contact_list') }}">Demandes de contact</a>
+        </li>
+    {% endif %}
 </ul>

@@ -12,14 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'contact_list')]
-    public function index(): Response
-    {
-        return $this->render('contact/index.html.twig', [
-            'controller_name' => 'ContactController',
-        ]);
-    }
-
     #[Route('/contact/new', name: 'contact_new')]
     public function createContact(Request $request, EntityManagerInterface $em): Response
     {
